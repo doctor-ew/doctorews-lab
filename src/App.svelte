@@ -1,28 +1,20 @@
 <script lang="ts">
   import Tailwind from "./Tailwind.svelte";
+  import Canvas from "./Canvas.svelte";
 
-  const draw_drew_img = () => {
-  const image = new Image();
-  image.src = "https://www.doctorew.com/shuttlebay/doctor-doctor-doctor.png";
-  image.onload = () => {
-    const picture = document.querySelector("picture");
-    const canvas = document.createElement("canvas");
-    canvas.width = image.width;
-    canvas.height = image.height;
-
-    const context = canvas.getContext("2d");
-    context.drawImage(image, 0, 0);
-    picture.appendChild(canvas);
-  };
-};
   
-</script>
+  
+  </script>
 <style global lang="postcss">
       @tailwind base;
       @tailwind components;
       @tailwind utilities;
 </style>
+<svelte:head>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
+</svelte:head>
 <Tailwind />
+<Canvas />
 
 <!--
 <main class="container mx-auto">
@@ -32,14 +24,26 @@
 </main>
 -->
 
-<canvas id="c" class="h-screen h-width absolute"></canvas>
-<main class="container mx-auto relative">
-  <section id="top" class="items-center flex justify-center">
-    <div class="welcome">
+<canvas id="c" class="fixed"></canvas>
+<main id="main" class="main relative h-screen flex-grow container mx-auto justify-center max-w-screen-lg space-y-10">
+  <section id="top" class="items-center w-full bg-white bg-opacity-50 shadow-xl m-0">
+    <!-- <div class="welcome "> -->
+      <h1 id="welcome" class="mx-auto flex-grow p-10 m-0 bg-no-repeat bg-white pl-40 font-bold">Welcome to DoctorEw's Lab</h1>
       <picture>
         <source srcset="https://www.doctorew.com/shuttlebay/doctor-doctor-doctor.webp" type="image/webp" />
       </picture>
-      <h1 class="max-w-sm mx-auto flex p-6 bg-white rounded-lg shadow-xl">Welcome to DoctorEw's Lab</h1>
-    </div>
+    <!-- </div> -->
+  </section>
+  <section id="chat" class="items-center w-full bg-white bg-opacity-50 shadow-xl m-0">
+    <h1 id="skippistan" class="mx-auto flex-grow p-10 m-0 bg-no-repeat bg-white pl-40 font-bold">Chat with Skippy the Magnificent!:</h1>
+      <form class="mx-auto flex p-6">
+        <div class="input text">
+          <label for="chat_box" class="active">
+            
+          </label>
+          <textarea id="chat_box" class="mx-auto flex p-6 bg-white rounded-lg shadow-xl bg-no-repeat pl-40 font-bold" name="chat_box" placeholder="Chat with Skippy the Magnificent!" required=""></textarea>
+        </div>
+      </form>
+      <div id="chat_log"></div>
   </section>
 </main>
